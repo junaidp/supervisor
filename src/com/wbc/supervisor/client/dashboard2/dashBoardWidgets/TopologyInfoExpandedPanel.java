@@ -7,7 +7,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
-import com.wbc.supervisor.shared.dashboard2dto.DeviceTopologyInfo;
+import com.wbc.supervisor.shared.DeviceTopologyInfo;
 
 
 /**

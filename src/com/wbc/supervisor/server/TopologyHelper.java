@@ -3,8 +3,8 @@ package com.wbc.supervisor.server;
 import com.wbc.supervisor.client.dashboard2.visjsCharts.VisjsConnection;
 import com.wbc.supervisor.client.dashboard2.visjsCharts.VisjsData;
 import com.wbc.supervisor.client.dashboard2.visjsCharts.VisjsNode;
-import com.wbc.supervisor.shared.dashboard2dto.DeviceInfoDTO;
-import com.wbc.supervisor.shared.dashboard2dto.DeviceTopologyInfo;
+import com.wbc.supervisor.shared.DeviceInfoDTO;
+import com.wbc.supervisor.shared.DeviceTopologyInfo;
 
 import java.util.ArrayList;
 import java.util.HashMap;

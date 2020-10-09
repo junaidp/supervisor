@@ -16,7 +16,7 @@ import com.wbc.supervisor.client.dashboard2.events.SelectedNetworkChangeEvent;
 import com.wbc.supervisor.client.dashboard2.wbcwidgets.WbcNameListboxWidget;
 import com.wbc.supervisor.client.dashboard2.wbcwidgets.WbcNameWidget;
 import com.wbc.supervisor.shared.RpcAnalysisInfo;
-import com.wbc.supervisor.shared.dashboard2dto.WbcNamesDTO;
+import com.wbc.supervisor.shared.WbcNamesDTO;
 
 import java.util.ArrayList;
 import java.util.logging.Level;

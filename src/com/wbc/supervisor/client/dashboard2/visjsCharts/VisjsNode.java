@@ -1,11 +1,11 @@
 package com.wbc.supervisor.client.dashboard2.visjsCharts;
 
-import java.io.Serializable;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
 /**
  * Created by JIM on 12/6/2014.
  */
-public class VisjsNode implements Serializable, VisjsNodeInterface {
+public class VisjsNode implements IsSerializable, VisjsNodeInterface {
     int id;        // 0
     String label;  // 1
     String title="";  // 2 hover text

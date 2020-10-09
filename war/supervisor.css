@@ -414,4 +414,266 @@ body, td, a, div, .p {
 }
 
 
+/** WBCUTILS **/
+
+
+.FlexTable {
+    border-top: thin solid #444444;
+    border-left: thin solid #444444;
+    border-right: thin solid #111111;
+    border-bottom: thin solid #111111;
+    background-color:  #505050;
+}
+
+.FlexTable-OddRow {
+    background-color: #fffbfb;
+}
+
+.FlexTable-EvenRow {
+    background-color:  #f5f3f3;
+}
+
+
+.FlexTable-ColumnLabel {
+    color: white;
+    padding: 3px;
+}
+
+.FlexTable-ColumnLabelCell {
+    border-width: 0 0 0px 20px;
+    border-style: solid;
+    border-color: white;
+    margin: 0;
+    padding: 0;
+    text-align: right;
+}
+.leftJustified{
+    text-align: left !important;
+}
+
+.FlexTable-Cell {
+    border-width: 10px 10px 10px 10px;
+    border-style: solid;
+    border-color: white;
+    padding: 15px;
+}
+
+.headerCell {
+    color: #2964ce;
+    cursor: pointer !important;
+}
+
+.logoText
+{
+    color: #93a7cc;;
+    font-size: 250%;
+    font-weight: bold;
+}
+
+.heading {
+    font-weight: bold;
+}
+
+.com-sencha-gxt-theme-triton-custom-client-button-TritonButtonCellToolBarAppearance-TritonButtonCellStyle-pressed {
+    background: #477aa6!important;
+    background: -webkit-linear-gradient(top,#ffffff 0%, #fffcfc 100%)!important;
+    background: -ms-linear-gradient(top,#ffffff 0%, #ffffff 100%)!important;
+    background: linear-gradient(to bottom,#ffffff 0%, #fffefe 100%)!important;
+}
+
+.centered {
+    position: fixed;
+    top: 50%;
+    left: 42%;
+    margin-left: -12%;
+    position: absolute !important;
+}
+
+.frame{
+    border: none;
+}
+
+.paddingRight50{
+    padding-right: 50px;
+}
+
+.marginRight50{
+    margin-right: 50px;
+}
+
+.currentIpAndServerHost
+{
+    padding-top: 10px;
+    font-size:20px;
+    color: #676767;
+    font-family:"Helvetica", "Arial", sans-serif;;
+}
+
+.loginButtonsContainer {
+    padding-left:163px;
+}
+.buttonLoginPanel
+{
+    width: 130px;
+}
+.buttonAddIntravue{
+    padding-left:11px;
+}
+.margin10{
+    margin: 10px !important;
+}
+.errorMessage{
+    background-color: #f2dede;
+    border-color: #ebcccc;
+    color: #a94442;
+    margin: 1px;
+    font-size: 14px;
+    padding:7px;
+}
+.warningMessage{
+    background-color: #fcf8e3;
+    border-color: #faf2cc;
+    color: #8a6d3b;
+    margin: 1px;
+    font-size: 14px;
+    padding:7px;
+}
+a:-webkit-any-link {
+    color: black !important;
+    font-size: 16px !important;
+    margin: 10px 0 10px 0 !important;
+}
+.clearText{
+    color: #9e9b9b;
+    font-size: small;
+    cursor: pointer;
+    padding-left:82px;
+    padding-top:2px;
+}
+.clearText:hover{
+    color: black;
+}
+.com-sencha-gxt-theme-base-client-grid-GridFiltersDefaultAppearance-GridFiltersStyle-filtered{
+    font-weight:100 !important;
+    font-style:normal !important;
+}
+
+.filteredHeading{
+    color: #15a703;
+    font-size: small;
+    padding-top:10px;
+    padding-left:10px;
+}
+
+/** FIELD LABEL**/
+.com-sencha-gxt-theme-triton-client-base-field-Css3FieldLabelAppearance-Css3FieldLabelStyles-fieldLabel{
+    font-weight : 400 !important;
+    font-size: 14px !important;
+}
+/** HEADER MENU **/
+.com-sencha-gxt-theme-triton-client-base-menu-Css3MenuBarItemAppearance-Css3MenuBarItemStyle-menuBarItem {
+    font-size: 19px !important;
+    font-weight: 500 !important;
+}
+/** DROP DOWNS MENU **/
+.com-sencha-gxt-theme-triton-client-base-menu-Css3MenuItemAppearance-Css3MenuItemStyle-menuListItem{
+    font-size: 18px !important;
+
+}
+
+body
+{
+    overflow: hidden;
+}
+/** TOGGLE BUTTONS**/
+.ln-desktop-whitebuttonbackground>div {
+    background: none !important;
+    color: none !important;
+    border-color: #5ea2dd !important;
+}
+
+.ln-desktop-whitebuttonbackground>div:hover {
+    background: none !important;
+    background-color: #5ea2dd !important;
+    border-color: #5ea2dd !important;
+    border-style: solid;
+}
+
+.ln-desktop-whitebuttonbackgroundredborder>div {
+    background: none !important;
+    color: none !important;
+    border-color: #cf4c35 !important;
+}
+
+.ln-desktop-whitebuttonbackgroundredborder>div:hover {
+    background: none !important;
+    background-color: #5ea2dd !important;
+    border-color: #cf4c35 !important;
+    border-style: solid;
+}
+
+
+.ln-desktop-whitebuttonbackgroundSelected>div {
+    background: none !important;
+    background-color: #dddddd !important;
+    border-color: #5ea2dd !important;
+}
+
+.ln-desktop-whitebuttonSelected>div {
+    background: none !important;
+    background-color: #5ea2dd !important;
+    border-color: #5ea2dd !important;
+}
+
+.ln-desktop-whitebuttonSelected>div>div {
+    background-color: #5ea2dd !important;
+    color: white !important;
+}
+
+.ln-desktop-whitebuttonbackgroundWithGreenText>div>div {
+    color: #5ea2dd !important;
+}
+
+.ln-desktop-whitebuttonbackgroundWithGreenText>div>div:hover {
+    color: white !important;
+}
+
+/* For light green toggle background color */
+.ln-desktop-whitebuttonbackgroundLite>div {
+    background: #5ea2dd !important;
+    color: none !important;
+    border-color: #5ea2dd !important;
+}
+
+.ln-desktop-whitebuttonbackgroundLite>div:hover {
+    background: none !important;
+    background-color: #5ea2dd !important;
+    border-color: #5ea2dd !important;
+    border-style: solid;
+}
+
+.ln-desktop-whitebuttonbackgroundWithGreenTextLite>div>div {
+    color: #5ea2dd !important;
+}
+
+.ln-desktop-whitebuttonbackgroundWithGreenTextLite>div>div:hover {
+    color: white !important;
+}
+.com-sencha-gxt-theme-triton-custom-client-button-TritonButtonCellToolBarAppearance-TritonButtonCellStyle-small {
+    line-height: 15px !important;
+}
+/* End of light green toggle background color */
+
+/* AccordionLayout Bar color*/
+.com-sencha-gxt-theme-triton-client-base-container-Css3AccordionLayoutAppearance-Css3AccordionStyle-header {
+    background: linear-gradient(to bottom,#5fdadd 0%, #5fdadd 100%) !important;
+}
+
+.com-sencha-gxt-theme-triton-client-base-container-Css3AccordionLayoutAppearance-Css3AccordionHeaderStyle-headerText, .com-sencha-gxt-theme-triton-client-base-container-Css3AccordionLayoutAppearance-Css3AccordionHeaderStyle-header{
+    color: #000000 !important;
+    font-size: 18px !important;
+}
+
+
+
 

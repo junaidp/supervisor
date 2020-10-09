@@ -3,7 +3,7 @@ package com.wbc.supervisor.dashboard;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.wbc.supervisor.shared.dto.MultiSeriesTimebasedChartDTO;
-import com.wbc.supervisor.shared.dashboard2dto.DeviceInfoDTO;
+import com.wbc.supervisor.shared.DeviceInfoDTO;
 import org.apache.log4j.Logger;
 import org.jooq.DSLContext;
 

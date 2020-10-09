@@ -29,5 +29,6 @@
     <orderEntry type="library" scope="PROVIDED" name="Tomcat 8.5.54" level="application_server_libraries" />
     <orderEntry type="library" name="gwt-user" level="project" />
     <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="jars" level="project" />
   </component>
 </module>

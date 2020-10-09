@@ -124,6 +124,10 @@ public class RpcAnalysisInfo {
         sb.append("Rpc Data -  ");
         sb.append( name );
         sb.append("  ");
+        if(description.contains("NamesPanel"))
+        {
+            System.out.println("HERE");
+        }
         sb.append( description );
         sb.append("  ");
         long timeToGetRpc = rpcReturnedTime - rpcCalledTime;

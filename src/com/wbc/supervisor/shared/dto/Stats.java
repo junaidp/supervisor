@@ -1,10 +1,10 @@
 package com.wbc.supervisor.shared.dto;
 
-import java.io.Serializable;
+import com.google.gwt.user.client.rpc.IsSerializable;
 import java.sql.Timestamp;
 
 
-public class Stats   implements Serializable {
+public class Stats   implements IsSerializable {
 	
 	private static final long serialVersionUID = 1L;
 

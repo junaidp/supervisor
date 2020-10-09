@@ -1,11 +1,11 @@
 package com.wbc.supervisor.shared.dto;
 
-import java.io.Serializable;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
 /**
  * Created by JIM on 12/31/2014.
  */
-public class DeviceinfoDataDTO implements Serializable {
+public class DeviceinfoDataDTO implements IsSerializable {
     String name;
     String ipAddress;
     String macAddress;

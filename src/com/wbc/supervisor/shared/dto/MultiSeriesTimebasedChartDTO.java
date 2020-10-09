@@ -1,11 +1,11 @@
 package com.wbc.supervisor.shared.dto;
 
-import java.io.Serializable;
+import com.google.gwt.user.client.rpc.IsSerializable;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 
-public class MultiSeriesTimebasedChartDTO implements Serializable
+public class MultiSeriesTimebasedChartDTO implements IsSerializable
 {
 
     /*

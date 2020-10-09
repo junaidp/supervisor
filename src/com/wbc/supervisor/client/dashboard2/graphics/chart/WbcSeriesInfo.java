@@ -2,12 +2,12 @@ package com.wbc.supervisor.client.dashboard2.graphics.chart;
 
 //import org.moxieapps.gwt.highcharts.client.Color;
 
-import java.io.Serializable;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
 /**
  * Created by JIM on 10/6/2014.
  */
-public class WbcSeriesInfo implements Serializable {
+public class WbcSeriesInfo implements IsSerializable {
     private String name;
     private String type;
     private int r;

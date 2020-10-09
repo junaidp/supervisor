@@ -1,11 +1,11 @@
 package com.wbc.supervisor.shared.dto;
 
-import java.io.Serializable;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
 /**
  * Created by Junaid on 11/9/2014.
  */
-public class TreeNode implements Serializable {
+public class TreeNode implements IsSerializable {
     // This Class is optional , If we like we can simple send values from impl class
     private String name;
     private int id;

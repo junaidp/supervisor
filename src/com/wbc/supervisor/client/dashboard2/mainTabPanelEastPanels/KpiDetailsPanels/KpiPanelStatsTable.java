@@ -15,7 +15,7 @@ import com.wbc.supervisor.client.dashboard2.graphics.chart.WbcSeriesInfo;
 import com.wbc.supervisor.client.dashboard2.wbcwidgets.WbcNameWidget;
 import com.wbc.supervisor.client.supervisor;
 import com.wbc.supervisor.client.supervisorServiceAsync;
-import com.wbc.supervisor.shared.dashboard2dto.KpiStatsRow;
+import com.wbc.supervisor.shared.KpiStatsRow;
 import com.wbc.supervisor.shared.utilities.GraphTimeCalculator;
 
 import java.util.ArrayList;

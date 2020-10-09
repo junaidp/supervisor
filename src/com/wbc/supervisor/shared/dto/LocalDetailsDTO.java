@@ -1,11 +1,11 @@
 package com.wbc.supervisor.shared.dto;
 
-import java.io.Serializable;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
 /**
  * Created by Junaid on 5/5/2015.
  */
-public class LocalDetailsDTO implements Serializable {
+public class LocalDetailsDTO implements IsSerializable {
     private String ipAddress;
     private String dateFormat;
     public String getIpAddress() {

@@ -9,6 +9,11 @@
     <inherits name="com.google.gwt.logging.Logging"/>
     <inherits name="com.google.gwt.json.JSON" />
     <inherits name="com.google.gwt.visualization.Visualization"/>
+    <inherits name='com.sencha.gxt.ui.GXT' />
+    <stylesheet src="reset.css" /> <!-- Sets up the GXT default stylesheet -->
+    <inherits name='com.sencha.gxt.theme.gray.Gray' />
+    <inherits name='com.sencha.gxt.theme.triton.Theme' />
+    <inherits name="com.google.web.bindery.autobean.AutoBean"/>
 
     <!--<set-property name="gwt.logging.enabled" value="TRUE"/>-->
     <!--<set-property name="compiler.stackMode" value="emulated" />-->

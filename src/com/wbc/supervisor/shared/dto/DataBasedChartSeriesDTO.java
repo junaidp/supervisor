@@ -3,13 +3,13 @@ package com.wbc.supervisor.shared.dto;
 
 import com.wbc.supervisor.client.dashboard2.graphics.chart.WbcSeriesInfo;
 
-import java.io.Serializable;
+import com.google.gwt.user.client.rpc.IsSerializable;
 import java.util.ArrayList;
 
 /**
  * Created by JIM on 1/29/2015.
  */
-public class DataBasedChartSeriesDTO implements Serializable {
+public class DataBasedChartSeriesDTO implements IsSerializable {
     WbcSeriesInfo wbcSeriesInfo;
     ArrayList<Number> dataList;
 

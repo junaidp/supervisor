@@ -17,7 +17,7 @@ import com.wbc.supervisor.client.dashboard2.wbcwidgets.WbcNameWidget;
 import com.wbc.supervisor.client.supervisor;
 import com.wbc.supervisor.client.supervisorServiceAsync;
 import com.wbc.supervisor.shared.RpcAnalysisInfo;
-import com.wbc.supervisor.shared.dashboard2dto.ConnectionDataDTO;
+import com.wbc.supervisor.shared.ConnectionDataDTO;
 
 
 import java.util.logging.Level;

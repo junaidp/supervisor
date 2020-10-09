@@ -14,9 +14,8 @@ import com.wbc.supervisor.client.dashboard2.visjsCharts.VisjsData;
 import com.wbc.supervisor.client.dashboard2.visjsCharts.VisjsNode;
 
 import com.wbc.supervisor.dashboard.*;
-import com.wbc.supervisor.shared.ColorInfo;
-import com.wbc.supervisor.shared.StatsConstants;
-import com.wbc.supervisor.shared.dashboard2dto.*;
+import com.wbc.supervisor.server.dashboardutilities.*;
+import com.wbc.supervisor.shared.*;
 import com.wbc.supervisor.shared.dto.*;
 import com.wbc.supervisor.database.generated.tables.records.PropertiesRecord;
 import com.wbc.supervisor.database.jooq.JooqUtil;
@@ -40,13 +39,42 @@ import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+// WBCUTIL
+import com.wbc.supervisor.client.dashboardutilities.view.login.UserAction;
+import com.wbc.supervisor.shared.dashboardutilities.UserEntity;
+import com.wbc.supervisor.shared.dashboardutilities.Globals;
+import com.wbc.supervisor.shared.dashboardutilities.*;
+import com.wbc.supervisor.shared.dashboardutilities.switchprobe.*;
+import com.wbc.supervisor.shared.dashboardutilities.threshold.ThresholdPresentationData;
+import com.wbc.supervisor.shared.dashboardutilities.threshold.ThresholdPresentationInfo;
+import com.wbc.supervisor.shared.dashboardutilities.threshold.ThresholdSetData;
+import com.wbc.supervisor.shared.dashboardutilities.threshold.ThresholdType;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.log4j.*;
+
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.net.*;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import static com.wbc.supervisor.client.dashboardutilities.Constants.APP_VERSION;
+import static com.wbc.supervisor.client.dashboardutilities.Constants.APP_VERSION_EXTRA;
+
 public class supervisorServiceImpl extends RemoteServiceServlet implements supervisorService {
+
     // Implementation of sample interface method
     Logger logger ;   // = Logger.getLogger("com.wbc.Dashboard2.server.dashboard2SericeImpl.class");
     public static DSLContext dslDashboard ;
@@ -58,12 +86,21 @@ public class supervisorServiceImpl extends RemoteServiceServlet implements super
     HashMap<Integer, DeviceInfoDTO> deviceidInfoMap;
     boolean logDsbsvrRequests = true;
     String appPath="";
-    long lastIntravueSampleLong = 0;  // this is set by DashboardThread
+    public long lastIntravueSampleLong = 0;  // this is set by DashboardThread
     private DashboardThread dashboardThread = null;
     private final boolean logRpcCalls = true;
 
     private String version = "0.8.267.150529";
     Properties intravueProperties = new Properties();
+
+
+    private static String sWbcAppDir;
+    public static String webinfPath;
+    public static Properties svrProps = new Properties();
+    private static SimpleDateFormat sdf;
+    private boolean debugImplCalls = true;
+    private static final Logger loggerUtil = LogManager.getLogger( supervisorServiceImpl.class);
+
 
     public supervisorServiceImpl() {
         System.out.println("ctor start");
@@ -86,7 +123,7 @@ public class supervisorServiceImpl extends RemoteServiceServlet implements super
         logger.addAppender(apndr);
         // setup Jooqds
         StringBuilder errors = new StringBuilder();
-        dsbConn = JooqUtil.getConnection("netvue", "netvue", "dashboard2", "127.0.0.1", errors);
+        dsbConn = JooqUtil.getConnection("root", "0502", "dashboard2", "127.0.0.1", errors);
         if ( dsbConn == null) {
             //TODO need a way to tell user there was a problem
             logger.fatal("Failed to get dashboard2 connection:, EXITING " + errors.toString());
@@ -866,7 +903,7 @@ public class supervisorServiceImpl extends RemoteServiceServlet implements super
         return result;
     }
 
-    @Override
+   /* @Override
     public void init(ServletConfig config) throws ServletException {
         System.out.println("init start");
         super.init(config);
@@ -891,7 +928,7 @@ public class supervisorServiceImpl extends RemoteServiceServlet implements super
             dashboardThread = null;
         }
         logger.debug("dashboard2ServiceImpl destroy end");
-    }
+    }*/
 
     @Override
     public String callDeviceInfoAndStatDetailsPage( int deviceid ) {
@@ -1007,6 +1044,765 @@ public class supervisorServiceImpl extends RemoteServiceServlet implements super
         return kpiList;
     }
 
+/////////////////////////////// WBCUTIL  ////////////////////////////////////////////////
+
+    @Override
+    public SwitchErrorInfo getCrcData( String json ) throws IOException
+    {
+
+        Gson gson = new Gson();
+        SwitchErrorInfo switchErrorInfo = gson.fromJson( json, SwitchErrorInfo.class );
+
+        return  switchErrorInfo;
+    }
+
+    @Override
+    public SwitchProbeReportInfoImpl getSwitchReport(String json, String fileName, String uploadedFile) throws IOException
+    {
+        Gson gson = new Gson();
+        SwitchProbeReportInfoImpl switchProbeReportInfoImpl = gson.fromJson( json, SwitchProbeReportInfoImpl.class);
+        SwitchProbeReportInfoImpl switchs = new SwitchProbeReportInfoImpl();
+        switchs.setGeneralData( switchProbeReportInfoImpl.getGeneralData() );
+        switchs.setMacList( switchProbeReportInfoImpl.getMacList() );
+        switchs.setDuplicateMacList(switchProbeReportInfoImpl.getDuplicateMacList());
+        switchs.setArpList( switchProbeReportInfoImpl.getArpList() );
+        switchs.setVlanList( switchProbeReportInfoImpl.getVlanList() );
+        switchs.setIfList( switchProbeReportInfoImpl.getIfList() );
+        switchs.setIpList( switchProbeReportInfoImpl.getIpList() );
+        switchs.setPortList( switchProbeReportInfoImpl.getPortList() );
+        switchs.setErrorMessages( switchProbeReportInfoImpl.getErrorMessages() );
+        switchs.setWarningMessages( switchProbeReportInfoImpl.getWarningMessages() );
+        switchs.setErrorInfo(switchProbeReportInfoImpl.getErrorInfo());
+
+        if(!fileName.equalsIgnoreCase("AlreadyUploaded"))
+            saveSwitchProbeJson(json, fileName, uploadedFile);
+
+        return switchs;
+    }
+
+    private void saveSwitchProbeJson(String json, String fileName, String uploadedFile) throws IOException {
+
+        String switchProbePath  = supervisorServiceImpl.getAppDir() + "/switchprobes/"+fileName;
+        FileUtils.writeStringToFile(new File(switchProbePath), json, StandardCharsets.UTF_8);
+    }
+
+    @Override
+    public String getAppDirPath(){
+        return supervisorServiceImpl.getAppDir() ;
+
+    }
+
+    private String getFormattedDate(Date date)
+    {
+        return new SimpleDateFormat("yyyyMMdd.HHMM").format(date);
+    }
+
+    private void setSymbolDTO( ArrayList<MacInfo> macList )
+    {
+        for(MacInfo macInfo : macList)
+        {
+            macInfo.setSymbolDTO(new SymbolDTO(macInfo.getDescid(), macInfo.getIp()));
+        }
+    }
+
+    @Override
+    public KpiClassInfo getKpiData( String json ) throws Exception
+    {
+        Gson gson = new Gson();
+        KpiClassInfo kpiClassInfo = gson.fromJson( json, KpiClassInfo.class);
+        return kpiClassInfo;
+    }
+
+    private static String readAll(Reader rd) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        int cp;
+        while ((cp = rd.read()) != -1) {
+            sb.append((char) cp);
+        }
+        return sb.toString();
+    }
+
+    @Override
+    public ConnectionInfoInfo getConnectionData( String url ) throws Exception
+    {
+        String json = "";
+
+        try {
+            Authenticator.setDefault(new IntravueAuthenticator());
+            InputStream is = new URL(url).openStream();
+
+            BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+            json = readAll(rd);
+            Gson gson = new Gson();
+            ConnectionInfoInfo connectionInfo = gson.fromJson( json, ConnectionInfoInfo.class);
+
+            return connectionInfo;
+        } catch (Exception ex)
+        {
+            throw ex;
+        }
+
+    }
+
+    @Override
+    public String getJson( ArrayList<Integer> list ) throws Exception
+    {
+        Gson gson = new Gson();
+        String result = gson.toJson( list );
+        return result;
+    }
+
+    @Override
+    public DisconnectionsByDayInfo getDisconnectionData( String json ) throws Exception
+    {
+        Gson gson = new Gson();
+        DisconnectionsByDayInfo disconnectionsByDayInfo = gson.fromJson( json, DisconnectionsByDayInfo.class);
+        return disconnectionsByDayInfo;
+    }
+
+    @Override
+    public ThresholdPresentationInfo getThresholdData( String json, ThresholdType thresholdType ) throws Exception
+    {
+        Gson gson = new Gson();
+        ThresholdPresentationInfo thresholdPresentationInfo = gson.fromJson( json, ThresholdPresentationInfo.class);
+        ThresholdPresentationInfo thresholdPresentationInfoFiltered = new ThresholdPresentationInfo();
+
+        HashMap<String, ThresholdPresentationData> presentationInfoMap = new HashMap<String, ThresholdPresentationData>(  );
+        //	int count =0;
+        for ( Map.Entry<String, ThresholdPresentationData> entry : thresholdPresentationInfo.getPresentationInfoMap().entrySet()) {
+            entry.getValue().getStatData().setMin(round(entry.getValue().getStatData().getMin()));
+            entry.getValue().getStatData().setMax(round(entry.getValue().getStatData().getMax()));
+            entry.getValue().getStatData().setAvg(round(entry.getValue().getStatData().getAvg()));
+            entry.getValue().getStatData().setStddev(round(entry.getValue().getStatData().getStddev()));
+            entry.getValue().getStatData().setStddev(round(entry.getValue().getStatData().getStddev()));
+            entry.getValue().setRecommend_threshold(entry.getValue().getStatData().getRecommended());
+
+            switch ( thresholdType )
+            {
+                case THRESHOLD_TYPE_PING:
+                case THRESHOLD_TYPE_RECV:
+                case THRESHOLD_TYPE_XMIT:
+                    if (entry.getValue().getThreshType() == ( thresholdType.getId() ))
+                    {
+                        presentationInfoMap.put( entry.getKey(), entry.getValue() );
+                    }
+                    break;
+
+                case THRESHOLD_TYPE_BOTH_BANDWIDTH:
+                    if (entry.getValue().getThreshType() == 2 || entry.getValue().getThreshType() == 3)
+                    {
+                        presentationInfoMap.put( entry.getKey(), entry.getValue() );
+                    }
+                    break;
+                case THRESHOLD_TYPE_ALL:
+                    presentationInfoMap.put( entry.getKey(), entry.getValue() );
+            }
+
+        }
+        thresholdPresentationInfoFiltered.setErrorInfo( thresholdPresentationInfo.getErrorInfo() );
+        thresholdPresentationInfoFiltered.setPresentationInfoMap( presentationInfoMap );
+
+        return thresholdPresentationInfoFiltered;
+    }
+
+    @Override
+    public String getRecommendedThresholdsJson( List<ThresholdSetData> list ) throws Exception
+    {
+        String thresholdString =  ServerUtilities.convertThresholdSetDataToString((ArrayList<ThresholdSetData>) list, null);
+        try {
+            return ServerUtilities.appendMd5ToThresholdSet(thresholdString);
+        }catch(Exception ex)
+        {
+            throw ex;
+        }
+    }
+
+    @Override
+    public ErrorInfo getErrorText(String json ) throws Exception
+    {
+        Gson gson = new Gson();
+        ErrorInfo result = gson.fromJson( json, ErrorInfo.class );
+        return result;
+    }
+
+    @Override
+    public String getIntraVueHostJson(IntravueHost intravueHost) {
+        Gson gson = new Gson();
+        String result = gson.toJson( intravueHost );
+        return result;
+    }
+
+    @Override
+    public IntravueHostDTO getIntravueHostDTO(String json) {
+        if (debugImplCalls) sysOut("Impl: calling getIntravueHostDTO");
+        Gson gson = new Gson();
+        IntravueHostDTO intravueHostDTO = gson.fromJson(json, IntravueHostDTO.class);
+        if (debugImplCalls) {
+            ErrorInfo ei = intravueHostDTO.getErrorInfo();
+            sysOut("Impl: return from getIntravueHostDTO " + ei.toString() );
+        }
+        return intravueHostDTO;
+    }
+
+    @Override
+    // 7/20/20 Panduit change, this returns BOTH pk,keycode as comma separated string in ErrorInfo text
+    public ErrorInfo getProductKeyAndKeycode(String ip) throws Exception {
+        sysOut("wbcutil version " + APP_VERSION );
+        if (debugImplCalls) sysOut("Impl: calling getProductKey for host "+ ip);
+        ErrorInfo errorInfo = IvHostHelper.getProductKeyAndKeycode(ip, logger);
+        if (!errorInfo.isOK()) {
+            sysOut("Impl:getProductKey returns an error: " + errorInfo.toString(), "error" );
+        }
+        if (debugImplCalls) sysOut("Impl: return from getProductKeyAndKeycode " + errorInfo.toString() );
+        return errorInfo;
+    }
+
+    @Override
+    public ErrorInfo validateKeycode(IntravueHost intravueHost , String getVersionUrl) {
+
+        String ivHostIp = intravueHost.getHostip();
+        String userEmail = intravueHost.getHostEmails();
+        String keycode = intravueHost.getKeycode();
+
+        if (debugImplCalls) sysOut("Impl: calling validateKeycode for host" + ivHostIp + ", keycode " + keycode);
+        ErrorInfo errorInfo = IvHostHelper.validateKeycode(userEmail, keycode, ivHostIp, logger);
+        if (debugImplCalls) sysOut("Impl: return from validateKeycode for host" + ivHostIp + ", keycode " + keycode);
+        // NOTE - at startup on after a new deployment, the host file may not exist but cookies do
+        if (errorInfo.isWarning()) {
+            sysOut("Impl:validatePK returns a warning: " + errorInfo.toString(), "warn" );
+        } else if ( errorInfo.isError()) {
+            sysOut("Impl:validatePK returns an error: " + errorInfo.toString(), "error" );
+        }else{
+            //ok
+            errorInfo = updateIntravueHost(intravueHost, getVersionUrl);
+        }
+        if (debugImplCalls) sysOut("Impl: return from validateKeycode " + errorInfo.toString() );
+        return errorInfo;
+    }
+
+    @Override
+    // 7/20/20 - this function parameter changed from pk to keycode
+    public ErrorInfo getExpirationDate(String keycode ) {
+        if (debugImplCalls) sysOut("Impl: calling getExpirationDate for keycode " + keycode);
+        ErrorInfo errorInfo = IvHostHelper.getExpirationDate( keycode, logger);
+        if (!errorInfo.isOK()) {
+            sysOut("Impl:getExpirationDate returns an error: " + errorInfo.toString(), "error" );
+        }
+        if (debugImplCalls) sysOut("Impl: return from getExpirationDate");
+        return errorInfo;
+    }
+
+
+    @Override
+    public IntravueHostDTO getIntravueHosts() {
+        if (debugImplCalls) sysOut("Impl: calling getIntravueHosts");
+        IvHostHelper ivHostHelper = new IvHostHelper ();
+        IntravueHostDTO dto = ivHostHelper.getIntravueHosts(logger);
+        if (debugImplCalls) sysOut("Impl: return from getIntravueHosts " + dto.getErrorInfo().toString());
+        return dto;
+    }
+
+    @Override
+    public ErrorInfo saveUpdateDeleteIntravueHost(IntravueHost intravueHost, IntravueHostAction intravueHostAction) {
+        IvHostHelper ivHostHelper = new IvHostHelper();
+        if (debugImplCalls) sysOut("Impl: calling saveUpdateDeleteIntravueHost with action " + intravueHostAction );
+        switch (intravueHostAction) {
+            case SAVE:
+                return ivHostHelper.saveIntravueHost(intravueHost, logger);
+            case UPDATE:
+                return ivHostHelper.updateIntravueHost(intravueHost, logger);
+            case DELETE:
+                return ivHostHelper.removeIntravueHost(intravueHost, logger);
+        }
+        if (debugImplCalls) sysOut("Impl: ERROR calling saveUpdateDeleteIntravueHost with unhandled action " + intravueHostAction );
+        return null;
+    }
+
+    private ErrorInfo updateIntravueHost(IntravueHost intravueHost, String getVersionUrl){
+        ErrorInfo errInfo = new ErrorInfo();
+        ErrorInfo expirationDateInfo = IvHostHelper.getExpirationDate(intravueHost.getKeycode(), logger);
+        intravueHost.setExpireDate(expirationDateInfo.getErrorText());
+
+        try {
+            Authenticator.setDefault(new IntravueAuthenticator());
+            InputStream is = new URL(getVersionUrl).openStream();
+
+            BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+            String json = readAll(rd);
+            Gson gson = new Gson();
+            ErrorInfo errorInfo = gson.fromJson( json, ErrorInfo.class);
+            intravueHost.setWbcserverVersion(errorInfo.getErrorText());
+            errInfo = saveUpdateDeleteIntravueHost(intravueHost, IntravueHostAction.UPDATE);
+        }
+        catch (Exception ex)
+        {
+            errInfo.makeError();
+            if ( ex.getLocalizedMessage().contains("/getVersion")) {
+                errInfo.setErrorText("Could not get ivDashboard version from host.  Check to be sure ivDashboard is installed in host.  See the Installation section of Help");
+            } else {
+                errInfo.setErrorText("Error in updateIntravueHost:"+ ex.getLocalizedMessage());
+            }
+        }
+        logger.info("TEST updateIntravueHost: result > " + errInfo.toString());
+        return errInfo;
+    }
+
+    @Override
+    public ErrorInfo saveCSVtoFile(UtilGrid utilGrid, String fileName) {
+
+        ErrorInfo returnInfo = new ErrorInfo();
+        logger.info("");
+        if (utilGrid == null ) {
+            returnInfo.makeError();
+            returnInfo.setErrorText("Error: data parameter missing or empty");
+
+        } else if (fileName == null || fileName.isEmpty()) {
+            returnInfo.makeError();
+            returnInfo.setErrorText("Error: Missing filename to export to");
+
+        }
+        else {
+
+            if (utilGrid instanceof ConnectionInfoInfo) {
+                return GridExports.saveCSVtoFileConnection((ConnectionInfoInfo) utilGrid, fileName);
+            } else if (utilGrid instanceof ThresholdPresentationInfo) {
+                return GridExports.saveCSVtoFileThreshold((ThresholdPresentationInfo) utilGrid, fileName);
+            }else if (utilGrid instanceof DisconnectionsByDayInfo) {
+                return GridExports.saveDisconnectedReportCSVtoFile((DisconnectionsByDayInfo) utilGrid, fileName);
+            }else if (utilGrid instanceof SwitchErrorInfo) {
+                return GridExports.saveIfInErrortoCSVFile((SwitchErrorInfo) utilGrid, fileName);
+            }
+            else if(utilGrid.getListArp() != null){
+                return GridExports.saveArpToCsvFileArp(utilGrid.getListArp(), fileName);
+            }
+            else if(utilGrid.getListCiscoVlanData() != null){
+                return GridExports.saveVlanToCsvFile(utilGrid.getListCiscoVlanData(), fileName);
+            }
+            else if(utilGrid.getListInterfaceData() != null){
+                return GridExports.saveIfDataToCsvFile(utilGrid.getListInterfaceData(), fileName);
+            }
+            else if(utilGrid.getListMacInfo() != null){
+                return GridExports.saveMacToCsvFile(utilGrid.getListMacInfo(), fileName);
+            }
+            else if(utilGrid.getListPortData() != null){
+                return GridExports.savePortDataToCsvFile(utilGrid.getListPortData(), fileName);
+            }
+            else if(utilGrid.getListIpInformation() != null){
+                return GridExports.saveIpToCsvFile(utilGrid.getListIpInformation(), fileName);
+            }
+
+            returnInfo.makeError();
+            returnInfo.setErrorText("Error: Data is Unknown");
+        }
+        return returnInfo;
+    }
+
+    @Override
+    public IntravueSwitchInfoInfo getSwitchesData(String json) {
+        Gson gson = new Gson();
+        IntravueSwitchInfoInfo intravueSwitchInfoInfo = gson.fromJson(json, IntravueSwitchInfoInfo.class);
+        return intravueSwitchInfoInfo;
+    }
+
+    @Override
+    public String readFile(String forFile, String fileName) throws FileNotFoundException {
+        String path = "";
+        // so that This method can be use for any other module for fileReading other than switchprobe.
+        if(forFile.equalsIgnoreCase("switchprobe"))
+            path  = supervisorServiceImpl.getAppDir() + "/switchprobes/"+fileName;
+        try {
+            String content = new String(Files.readAllBytes(Paths.get(path)));
+            return content;
+        }catch (Exception ex){
+            logger.error("Error in reading file"+ ex);
+        }
+        return "";
+    }
+
+    @Override
+    public ErrorInfo saveUpdateDeleteUsers(UserEntity userEntity, UserAction userAction) {
+        //TODO: implement the save/update/Delete User
+        try{
+            Class.forName("org.mariadb.jdbc.Driver");
+            Connection con= DriverManager.getConnection(
+                    "jdbc:mariadb://127.0.0.1:3306/wbcutil","netvue","netvue");
+            Statement stmt=con.createStatement();
+            ResultSet rs=stmt.executeQuery("select * from user ");
+            while(rs.next())
+                System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3));
+            con.close();
+        }catch(Exception e){ System.out.println(e);}
+
+        IvHostHelper ivHostHelper = new IvHostHelper();
+        if (debugImplCalls) sysOut("Impl: calling saveUpdateDeleteUser with action " + userAction );
+        switch (userAction) {
+            case SAVE:
+                //	return ivHostHelper.saveUser(userEntity, logger);
+            case UPDATE:
+
+            case DELETE:
+
+        }
+        if (debugImplCalls) sysOut("Impl: ERROR calling saveUpdateDeleteUser with unhandled action " + userAction );
+        return null;
+    }
+
+    @Override
+    public ArrayList<WbcFileInfo> getSwitchprobeLocalFiles()
+    {
+        ArrayList<WbcFileInfo> filelist = ServerUtilities.getSwitchprobeLocalFiles( supervisorServiceImpl.getAppDir() + "/switchprobes/", logger );
+        return filelist;
+    }
+
+    @Override
+    public ArrayList<String> getSwitchprobeLocalFilesAsString()
+    {
+        ArrayList<String> filelist = ServerUtilities.getSwitchprobeLocalFilesAsString( supervisorServiceImpl.getAppDir() + "/switchprobes/", logger );
+        return filelist;
+    }
+
+    @Override
+    public IntravueHostStatus getIntravueStatusInfo(String ip, IntravueHostStatus ivHostStatus) {
+        ErrorInfo errorInfo = IvJsonApi.getIntravueStatusInfo(ip, ivHostStatus, logger);
+        if(!errorInfo.getResult().equalsIgnoreCase("ok"))
+            ivHostStatus.setHostDescription("Error:" + errorInfo.getErrorText() );
+        return ivHostStatus;
+
+    }
+
+    private Double round(Double input)
+    {
+        BigDecimal bd = new BigDecimal(input).setScale(2, RoundingMode.HALF_UP);
+        return bd.doubleValue();
+    }
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		/*
+		String catalinaBase = System.getProperty("catalina.base");
+
+		System.out.println("DEBUG catalina base is " + catalinaBase );
+		if (catalinaBase == null || catalinaBase.isEmpty()) {
+			System.out.println("FATAL no catalina Base" );
+			// running in debug or intellij run mode, force folder
+			sysOut("init throwing UnavailableExcetion !!");
+			throw new
+					UnavailableException("FATAL: could not locate install folder. ");
+		}
+		 */
+        getMakeAppDir(config);
+        initServer();
+        ServerTest.runStartupTests( sWbcAppDir, logger );
+    }
+
+    /*
+    In DEV mode under windows intellij
+    Using CATALINA_BASE:   "C:\Users\Jim\.IntelliJIdea2019.3\system\tomcat\Unnamed_wbcutil_2"
+    Using CATALINA_HOME:   "D:\DEV2020\2020-5\wbcUtilities\tomcat8"
+
+    When deployed to Panduit intravue's tomcat
+
+
+    When deployed to RPi
+    Webapps folder is /home/pi/wbcutil
+    webinf /home/pi/wbcutil/tomcat8/webapps/wbcutil/WEB-INF
+
+
+     */
+    public void getMakeAppDir(ServletConfig config)  {
+        // get current drive
+        webinfPath = config.getServletContext().getRealPath("/WEB-INF");
+        int offset = 8;
+        String testbase = System.getProperty("catalina.base");
+        sysOut("BASE = " + testbase);
+        String testhome = System.getProperty("catalina.home");
+        sysOut( "HOME = " + testhome);
+        int index = webinfPath.indexOf( "intravue");
+        if (index < 1) {
+            // installed in private tomcat
+            index = webinfPath.indexOf( Globals.INSTALL_FOLDERNAME);
+            if (index < 1) {
+                // we are on WBC linux or testing
+                index = webinfPath.indexOf("tomcat8");
+                if ( index > 5) {
+                    //	 THIS IS THE NORMAL CASE FOR PRODUCTION, WHEN NOT TESTING
+                    sWbcAppDir = webinfPath.substring(0, index-1);
+                } else {
+                    sysOut( "USERNAME = " + System.getProperty("USERNAME"));
+                    sysOut("could not find expected start app location from " + webinfPath + ", setting MAC debug mode");
+                    webinfPath = "/Users/junaidp/IdeaProjects/wbcutil/war/WEB-INF";//TEST
+                    sWbcAppDir = "/Users/junaidp/IdeaProjects/wbcutil";
+                }
+            } else {
+                // we are in intellij debugger ??
+                offset = Globals.INSTALL_FOLDERNAME.length();
+                sWbcAppDir = webinfPath.substring(0, index + offset) ;
+            }
+        } else {
+            // we are installed on Panduit Intravue
+            sWbcAppDir = webinfPath.substring(0, index + offset) + "/" + Globals.INSTALL_FOLDERNAME ;
+        }
+        sysOut( "App Dir " + sWbcAppDir);
+        String dirName = sWbcAppDir + "/logs";
+        File dirFile = new File(dirName);
+        if ( !dirFile.exists() ) dirFile.mkdirs();
+        dirName = sWbcAppDir + "/data";
+        dirFile = new File(dirName);
+        if ( !dirFile.exists() ) dirFile.mkdirs();
+        dirName = sWbcAppDir + "/dist";
+        dirFile = new File(dirName);
+        if ( !dirFile.exists() ) dirFile.mkdirs();
+
+		/*File test = new File( sWbcAppDir );
+		if ( !test.exists()) {
+			test.mkdirs();
+		}
+		if ( !new File( sWbcAppDir ).exists() ) {
+			new File( sWbcAppDir ).mkdir();
+		}*/
+    }
+
+
+    public static void initServer(){
+        boolean debugInit = true;
+        if (debugInit) sysOut( Globals.WEBAPP_NAME + " init started");
+        // ServletContext sc = getServletContext();
+        try {
+            File test = new File(sWbcAppDir + "/logs" );
+            if (!test.exists()) {
+                test.mkdirs();
+            }
+            initAppProperties();
+            //  ------  create logging
+            String targetLog = test.getAbsolutePath() + "/" + Globals.WEBAPP_NAME + ".log";
+            RollingFileAppender apndr = null;
+            try {
+                apndr = new RollingFileAppender(new PatternLayout("%d %-5p [%c{1}] %m%n"), targetLog, true);
+                apndr.setMaxFileSize("5MB");
+                apndr.setMaxBackupIndex(10);
+                apndr.rollOver();
+            } catch (IOException e) {
+                loggerUtil.error("initServer IOException - " + e.getMessage());
+                //e.printStackTrace();
+            }
+            loggerUtil.addAppender(apndr);
+            loggerUtil.setLevel( Level.toLevel( svrProps.getProperty("log.level"))) ;
+            //
+            loggerUtil.warn("----------------------  START (init called) ----------- Version " + APP_VERSION + " - " + APP_VERSION_EXTRA +  " ---------- 0");
+            loggerUtil.info("Webapps folder is " + sWbcAppDir );
+            loggerUtil.info("webinfPath folder is " + webinfPath );
+
+            // sysOut("ServerInfo >> " + config.getServletContext().getServerInfo() );
+            //-----------------------------------
+            for (Object o : svrProps.keySet()) {
+                String key = (String) o;
+                String value = svrProps.getProperty(key);
+                loggerUtil.info("initServer Property " + key + " = " + value);
+            }
+            //-----------------------------------
+        } catch ( Exception ex ) {
+            loggerUtil.fatal("initServer Exception " + ex.getMessage());
+        }
+        //-----------------------------------
+        sysOut("initServer init complete");
+    }
+
+	/*
+	This method is no longer used, dbpks.txt stays in WEB-INF/static
+
+	private static void initAuthorizedPkFile() {
+		// does it exist ?
+		File test = new File( sWbcAppDir + "/data" );
+		if ( !test.exists()) {
+			test.mkdirs();
+		}
+		// if not copy it from web-inf
+		File srcFile = new File (System.getProperty("catalina.base") + "/webapps/wbcutil/WEB-INF/data/dbpks.txt");
+		File destFile = new File(sWbcAppDir + "/data/dbpks.txt");
+		if ( ! srcFile.exists()) {
+			sysOut("dbpks does not exist in src to copy from " + srcFile.getAbsolutePath() );
+		} else {
+			if (!destFile.exists()) {
+				sysOut("dbpks does not exist, copying it from " + srcFile.getAbsolutePath() + " to " + destFile.getAbsolutePath());
+				copyFileUsingStream(srcFile, destFile);
+			}
+		}
+		if (!destFile.exists()) {
+			logger.fatal("PK Authorization file does not exist, no PKs can be authorized");
+		}
+	}
+	 */
+
+    private static void copyFileUsingStream(File source, File dest) {
+        InputStream is = null;
+        OutputStream os = null;
+        try {
+            is = new FileInputStream(source);
+            os = new FileOutputStream(dest);
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = is.read(buffer)) > 0) {
+                os.write(buffer, 0, length);
+            }
+            if (is != null) is.close();
+            if (os != null) os.close();
+        } catch ( IOException ex) {
+            sysOut("IOException in copyFileUsingStream: " + ex.getMessage());
+        }
+    }
+
+    private static void initAppProperties()  {
+        svrProps = new Properties();
+        try {
+            String propfilename =  sWbcAppDir + "/dashboard.properties" ;
+            File fProps = new File( propfilename );
+            if ( !fProps.exists()) {
+                loggerUtil.warn( "prop file does not exist, creating new ");
+                OutputStream os = new FileOutputStream( propfilename );
+                svrProps.setProperty("server.debug", "false");
+                svrProps.setProperty("log.level", "" + Level.DEBUG );
+                svrProps.setProperty("server.database.port", "3310" );
+                svrProps.setProperty("switchprobe.debug", "false" );
+                svrProps.setProperty("authentication.debug", "false" );
+                svrProps.store(os, "");
+                os.close();
+            }
+            else
+            {
+                InputStream is = new FileInputStream( fProps);
+                svrProps.load(is);
+                boolean foundAdditions = false;
+
+                if (svrProps.getProperty("switchprobe") == null) {
+                    svrProps.setProperty("switchprobe.debug", "false" );
+                    foundAdditions = true;
+                }
+                if (svrProps.getProperty("authentication") == null) {
+                    svrProps.setProperty("authentication.debug", "false" );
+                    foundAdditions = true;
+                }
+                is.close();
+                if (foundAdditions) {
+                    OutputStream os = new FileOutputStream(propfilename);
+                    svrProps.store(os, "");
+                    os.close();
+                }
+
+            }
+        } catch ( Exception ex ) {
+            loggerUtil.fatal( "initAppProperties Exception " + ex.toString() ) ;
+        }
+    }
+
+    public Properties getSvrProperties() {
+        return svrProps;
+    }
+
+
+    public static int getServerDatabasePort() {
+        return Integer.parseInt( svrProps.getProperty("server.database.port", "3310"));
+    }
+    public static String getAppDir(){
+        return sWbcAppDir;
+    }
+
+    private static void sysOut(String s) {
+        if (s==null) {
+            s = "null message";
+        }
+        loggerUtil.info( String.format("%s", s ));
+    }
+
+    private static void sysOut(String str, String level) {
+        if (str==null) {
+            str = "null message";
+        }
+        String msg = String.format("%s",  str );
+        if (level.equalsIgnoreCase("error")) {
+            loggerUtil.error(str);
+        } else if (level.equalsIgnoreCase("debug")) {
+            loggerUtil.debug(str);
+        } else if (level.equalsIgnoreCase("info")) {
+            loggerUtil.info(str);
+        } else if (level.equalsIgnoreCase("warn")) {
+            loggerUtil.warn(str);
+        } else {
+            loggerUtil.warn( str + "  (note) incorrect level passed to sysOut=" + level );
+        }
+    }
+
+    @Override
+    public void destroy() {
+        super.destroy();
+        sysOut("Impl destroy called.", "info" );
+    }
+
+    public static class IntravueAuthenticator extends Authenticator {
+
+        // Called when password authorization is needed
+        protected PasswordAuthentication getPasswordAuthentication() {
+            CookieHandler.setDefault(new CookieManager(null, CookiePolicy.ACCEPT_ALL));
+            boolean debug = true;
+            if (debug) loggerUtil.debug("IntravueAuthenticator called.");
+
+            String username = "admin";
+            String password = "intravue";
+
+            return new PasswordAuthentication(username, password.toCharArray());
+
+        }
+    }
+
+    public static Logger getLogger() {
+        return loggerUtil;
+    }
+
+
+    public static String getExceptionStackLines( String message,Exception exception, int numLines ) {
+        return message + System.lineSeparator() + getExceptionStackLines(exception,numLines);
+    }
+
+    public static String getExceptionStackLines( Exception exception, int numLines ) {
+        StringBuilder sb = new StringBuilder();
+        final StackTraceElement[] stackTrace = exception.getStackTrace();
+        int index = 0;
+        for (StackTraceElement element : stackTrace)
+        {
+            final String exceptionMsg =
+                    "Exception thrown from " + element.getMethodName()
+                            + " in class " + element.getClassName() + " [on line number "
+                            + element.getLineNumber() + " of file " + element.getFileName() + "]";
+            try
+            {
+                if (index==0) {
+                    sb.append(exceptionMsg);
+                    sb.append(System.lineSeparator());
+                }
+                sb.append(element.toString());
+                sb.append( System.lineSeparator());
+                index++;
+                if (index >= numLines) break;
+                /*
+                out.write((headerLine + newLine).getBytes());
+                out.write((headerTitlePortion + index++ + newLine).getBytes() );
+                out.write((headerLine + newLine).getBytes());
+                out.write((exceptionMsg + newLine + newLine).getBytes());
+                out.write(
+                        ("Exception.toString: " + element.toString() + newLine).getBytes());
+                 */
+            }
+            catch (Exception ioEx)
+            {
+                System.err.println(
+                        "IOException encountered while trying to write "
+                                + "StackTraceElement data \n"
+                                + ioEx.getMessage() );
+            }
+        }
+        return sb.toString();
+    }
 
 
 }

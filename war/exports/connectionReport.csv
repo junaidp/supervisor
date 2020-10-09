@@ -1,0 +1,84 @@
+IP Address;Network;Name;vendor;Join Time;Join Days;Last Time;Last Days;Connected?;Critical State
+10.1.1.69 ;0;ERIC (not found 2, deleted?) (not found 1, deleted?);Dell Inc.;null;null;null;null;true;1
+10.1.1.65 ;0;Boiler Control 2 (not found 2, deleted?) (not found 1, deleted?);Dell Inc. ;null;null;null;null;true;2
+10.1.1.66 ;0;Op Station 54 (not found 2, deleted?) (not found 1, deleted?);Jetway Information Co.  Ltd.;null;null;null;null;true;2
+10.1.1.67 ;0;no name (not found 2, deleted?) (not found 1, deleted?);;null;null;null;null;false;0
+10.1.1.68 ;0;Boiler Control 1 (not found 2, deleted?) (not found 1, deleted?);Globalscale Technologies  Inc.;null;null;null;null;true;2
+10.1.1.61 ;0;SRICHELS-US (not found 2, deleted?) (not found 1, deleted?);Wistron InfoComm(Kunshan)Co. Ltd;null;null;null;null;false;0
+10.1.1.62 ;0;Scanner 25 (not found 2, deleted?) (not found 1, deleted?);Samsung Electro-Mechanics;null;null;null;null;false;1
+10.1.1.63 ;0;Dell Managed Switch (not found 2, deleted?) (not found 1, deleted?);Dell Inc. ;null;null;null;null;true;3
+10.1.1.20 ;0;UB810IMAP1 (not found 2, deleted?) (not found 1, deleted?);VMware  Inc. ;null;null;null;null;true;2
+10.1.1.161 ;0;UB810IMAP3 (not found 2, deleted?) (not found 1, deleted?);VMware  Inc. ;null;null;null;null;true;2
+10.1.1.160 ;0;LINUX-COMPUTER (not found 2, deleted?) (not found 1, deleted?);3Com Corporation;null;null;null;null;true;0
+10.1.1.163 ;0;UB810IMAP2 (not found 2, deleted?) (not found 1, deleted?);VMware  Inc. ;null;null;null;null;true;2
+10.1.1.165 ;0;QUICKBOOKS-XP (not found 2, deleted?) (not found 1, deleted?);VMware  Inc. ;null;null;null;null;true;2
+10.1.1.244 ;0;Cisco Managed Switch (not found 2, deleted?) (not found 1, deleted?);Cisco Systems  Inc;null;null;null;null;true;3
+10.1.1.169 ;0;Dell Managed Switch (not found 2, deleted?) (not found 1, deleted?);Dell Inc.;null;null;null;null;false;2
+10.1.1.203 ;0;MICE MM2 Managed Switch (not found 2, deleted?) (not found 1, deleted?);Hirschmann Automation and Control;null;null;null;null;true;3
+10.1.1.59 ;0;JIMS-M6500 (not found 2, deleted?) (not found 1, deleted?);Dell Inc. ;null;null;null;null;true;2
+10.1.1.98 ;0;Document Server (not found 2, deleted?) (not found 1, deleted?);Intel Corporation;null;null;null;null;true;2
+10.1.1.55 ;0;DEKI-HAYES (not found 2, deleted?) (not found 1, deleted?);VMware  Inc. ;null;null;null;null;true;2
+10.1.1.57 ;0;Dell Wireless Router (not found 2, deleted?) (not found 1, deleted?);Dell Inc.;null;null;null;null;true;3
+10.1.1.13 ;0;RTU 211 (not found 2, deleted?) (not found 1, deleted?);Pronet;null;null;null;null;true;2
+10.1.1.50 ;0;VM2-XPPRO (not found 2, deleted?) (not found 1, deleted?);VMware  Inc. ;null;null;null;null;false;2
+10.1.1.94 ;0;JESSE-LAPTOP (not found 2, deleted?) (not found 1, deleted?);Intel Corporation;null;null;null;null;false;1
+10.1.1.95 ;0;CDOYLE-HP (not found 2, deleted?) (not found 1, deleted?);Hewlett Packard ;null;null;null;null;true;3
+10.1.1.52 ;0;BILL-XPPRO (not found 2, deleted?) (not found 1, deleted?);VMware  Inc. ;null;null;null;null;false;0
+10.1.1.96 ;0;Eng. Laptop (not found 2, deleted?) (not found 1, deleted?);Jetway Information Co.  Ltd.;null;null;null;null;false;2
+10.1.1.53 ;0;VM3-XPPRO (not found 2, deleted?) (not found 1, deleted?);VMware  Inc. ;null;null;null;null;true;0
+10.1.1.97 ;0;AGV Forklift 21 (not found 2, deleted?) (not found 1, deleted?);Savant Systems LLC;null;null;null;null;false;1
+10.1.1.92 ;0;DIM1100 (not found 2, deleted?) (not found 1, deleted?);Intel Corporation;null;null;null;null;true;3
+10.1.1.192 ;0;Palletizer 3 (not found 2, deleted?) (not found 1, deleted?);Litton Industries  Inc.;null;null;null;null;true;2
+10.1.1.196 ;0;Packaging Machine 45 (not found 2, deleted?) (not found 1, deleted?);Jetway Information Co.  Ltd.;null;null;null;null;false;2
+10.1.1.198 ;0;OEE Server (not found 2, deleted?) (not found 1, deleted?);Globalscale Technologies  Inc.;null;null;null;null;true;2
+10.1.1.110 ;0;Phaser 6180DN-9DBF65 (not found 2, deleted?) (not found 1, deleted?);Xerox Corporation;null;null;null;null;true;2
+10.1.1.230 ;0;Historian Server (not found 2, deleted?) (not found 1, deleted?);Belkin Components;null;null;null;null;true;2
+10.1.1.155 ;0;Process controller 2A (not found 2, deleted?) (not found 1, deleted?);Globalscale Technologies  Inc.;null;null;null;null;true;3
+10.1.1.47 ;0;JIMS-M6500 (not found 2, deleted?) (not found 1, deleted?);Liteon Technology Corporation;null;null;null;null;true;1
+10.1.1.48 ;0; (not found 2, deleted?) (not found 1, deleted?);;null;null;null;null;false;0
+10.1.1.49 ;0;Printer (not found 2, deleted?) (not found 1, deleted?);Brother industries  LTD;null;null;null;null;true;3
+10.1.1.43 ;0;Ethernet Direct Managed Switch (not found 2, deleted?) (not found 1, deleted?);Ethernet Direct Corporation;null;null;null;null;true;3
+10.1.1.87 ;0;VM3-XPPRO (not found 2, deleted?) (not found 1, deleted?);VMware  Inc.   ;null;null;null;null;false;2
+10.1.1.88 ;0;SUZANNE-PC (not found 2, deleted?) (not found 1, deleted?);Dell Inc.;null;null;null;null;true;3
+10.1.1.89 ;0;IV-REFERENCE (not found 2, deleted?) (not found 1, deleted?);VMware  Inc. ;null;null;null;null;true;2
+10.1.1.46 ;0;Scanner 26 (not found 2, deleted?) (not found 1, deleted?);Motorola Mobility LLC;null;null;null;null;false;1
+10.1.1.83 ;0;CLAIRE-DESKTOP (not found 2, deleted?) (not found 1, deleted?);Intel Corporation;null;null;null;null;true;3
+10.1.1.84 ;0;ASWALES-HP (not found 2, deleted?) (not found 1, deleted?);Hewlett Packard ;null;null;null;null;true;2
+10.1.1.85 ;0;VM-SVCCONTRACTS (not found 2, deleted?) (not found 1, deleted?);VMware  Inc. ;null;null;null;null;true;2
+10.1.1.42 ;0;Ethernet Direct Managed Switch (not found 2, deleted?) (not found 1, deleted?);Ethernet Direct Corporation;null;null;null;null;true;3
+10.1.1.86 ;0;JIMDEV-XP (not found 2, deleted?) (not found 1, deleted?);VMware  Inc.;null;null;null;null;false;2
+10.1.1.190 ;0;Palletizer 1 (not found 2, deleted?) (not found 1, deleted?);Litton Industries  Inc.;null;null;null;null;true;2
+10.1.1.81 ;0;UB606LAMP (not found 2, deleted?) (not found 1, deleted?);VMware  Inc. ;null;null;null;null;true;2
+10.1.1.181 ;0;Open Loop Controller 21 (not found 2, deleted?) (not found 1, deleted?);Newport Electronics;null;null;null;null;false;2
+10.1.1.180 ;0;RTU 212 (not found 2, deleted?) (not found 1, deleted?);Beck IPC;null;null;null;null;false;2
+10.1.1.141 ;0;ArmorBlock I/O (not found 2, deleted?) (not found 1, deleted?);Rockwell Automation;null;null;null;null;true;3
+10.1.1.185 ;0;FL IL 24 BK-ETH/IP-PAC (not found 2, deleted?) (not found 1, deleted?);Phoenix Contact Electronics;null;null;null;null;false;3
+10.1.1.140 ;0;PLC Material Movement 23 (not found 2, deleted?) (not found 1, deleted?);Rockwell Automation;null;null;null;null;true;3
+10.1.1.184 ;0;FL IL 24 BK-ETH/IP-PAC (not found 2, deleted?) (not found 1, deleted?);Phoenix Contact Electronics;null;null;null;null;false;3
+10.1.1.142 ;0;PLC  23 I/O Rack 3 (not found 2, deleted?) (not found 1, deleted?);Rockwell Automation;null;null;null;null;true;3
+10.1.1.144 ;0;PLC 23 I/O Rack 2 (not found 2, deleted?) (not found 1, deleted?);Rockwell Automation;null;null;null;null;true;3
+10.1.1.188 ;0;N-TRON Managed Switch (not found 2, deleted?) (not found 1, deleted?);Red Lion Controls  LP;null;null;null;null;true;3
+10.1.1.224 ;0;Lantronix EPS Print Server (not found 2, deleted?) (not found 1, deleted?);Lantronix;null;null;null;null;true;3
+10.1.1.146 ;0;RTU 234 (not found 2, deleted?) (not found 1, deleted?);Zypcom  Inc ;null;null;null;null;true;2
+10.1.1.106 ;0;OP Station 28 (not found 2, deleted?) (not found 1, deleted?);Jetway Information Co.  Ltd. ;null;null;null;null;true;2
+10.1.1.38 ;0;AGSNVIVOSTRO (not found 2, deleted?) (not found 1, deleted?);Dell Inc.;null;null;null;null;true;2
+10.1.1.1 ;0;Cisco Managed Switch (not found 2, deleted?) (not found 1, deleted?);Cisco Systems  Inc ;null;null;null;null;true;3
+10.1.1.76 ;0;BILL-MACBOOK (not found 2, deleted?) (not found 1, deleted?);Apple  Inc.;null;null;null;null;true;1
+10.1.1.77 ;0;Palletizer 2 (not found 2, deleted?) (not found 1, deleted?);Litton Industries  Inc.;null;null;null;null;true;2
+10.1.1.78 ;0;Printer (not found 2, deleted?) (not found 1, deleted?);Brother industries  LTD.;null;null;null;null;false;3
+10.1.1.79 ;0;no name (not found 2, deleted?) (not found 1, deleted?);;null;null;null;null;false;0
+10.1.1.72 ;0;OP-JSAH-MACBOOK (not found 2, deleted?) (not found 1, deleted?);Apple  Inc.;null;null;null;null;false;1
+10.1.1.73 ;0;VM Data Collection (not found 2, deleted?) (not found 1, deleted?);VMware  Inc.;null;null;null;null;false;2
+10.1.1.74 ;0;NVI-G9CSA3TISQJ (not found 2, deleted?) (not found 1, deleted?);VMware  Inc. ;null;null;null;null;true;2
+10.1.1.75 ;0;Eng. Tools Server (not found 2, deleted?) (not found 1, deleted?);VMware  Inc. ;null;null;null;null;true;2
+10.1.1.70 ;0;FL Hub Agent (not found 2, deleted?) (not found 1, deleted?);Phoenix Contact Electronics;null;null;null;null;true;3
+10.1.1.71 ;0;MARK-PC (not found 2, deleted?) (not found 1, deleted?);Quanta Computer Inc.;null;null;null;null;true;3
+10.1.1.170 ;0;3Com SuperStack II Managed Switch (not found 2, deleted?) (not found 1, deleted?);3Com Corporation;null;null;null;null;false;3
+10.1.1.172 ;0;Ethernet Direct Managed Switch (not found 2, deleted?) (not found 1, deleted?);Ethernet Direct Corporation;null;null;null;null;true;3
+10.1.1.171 ;0;Dell Managed Switch (not found 2, deleted?) (not found 1, deleted?);Dell Inc.;null;null;null;null;true;3
+10.1.1.250 ;0;Data Collector (not found 2, deleted?) (not found 1, deleted?);Dell Inc.;null;null;null;null;true;2
+10.1.1.175 ;0;Cisco Manged Switch (not found 2, deleted?) (not found 1, deleted?);Cisco Systems  Inc ;null;null;null;null;true;3
+10.1.1.252 ;0;Cisco Managed Switch (not found 2, deleted?) (not found 1, deleted?);Cisco Systems  Inc ;null;null;null;null;true;3
+10.1.1.211 ;0;Op Station 23 (not found 2, deleted?) (not found 1, deleted?);Jetway Information Co.  Ltd.;null;null;null;null;true;2
+10.1.1.210 ;0;IVA-SUPERVISOR (not found 2, deleted?) (not found 1, deleted?);Nexcom International Co.  Ltd.;null;null;null;null;true;3
+10.1.1.137 ;0;Ethernet Direct Managed Switch (not found 2, deleted?) (not found 1, deleted?);Ethernet Direct Corporation;null;null;null;null;true;3

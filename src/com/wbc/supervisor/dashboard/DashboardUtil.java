@@ -2,9 +2,9 @@ package com.wbc.supervisor.dashboard;
 
 
 import com.wbc.supervisor.shared.dto.DeviceinfoNamesDTO;
-import com.wbc.supervisor.shared.dashboard2dto.DeviceInfoDTO;
-import com.wbc.supervisor.shared.dashboard2dto.DeviceTopologyInfo;
-import com.wbc.supervisor.shared.dashboard2dto.NamesDTO;
+import com.wbc.supervisor.shared.DeviceInfoDTO;
+import com.wbc.supervisor.shared.DeviceTopologyInfo;
+import com.wbc.supervisor.shared.NamesDTO;
 import com.wbc.supervisor.database.generated.tables.Deviceinfo;
 import com.wbc.supervisor.database.generated.tables.Devicenameinfo;
 import com.wbc.supervisor.database.generated.tables.Properties;

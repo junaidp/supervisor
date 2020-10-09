@@ -8,7 +8,7 @@
         </g:north>
 
         <g:center size='1000' width="100%" unit='EM'>
-           <x:MainPanel></x:MainPanel>
+       <x:MainPanel></x:MainPanel>
         </g:center>
 
         <g:south size="0" width="100%" unit='EM'>

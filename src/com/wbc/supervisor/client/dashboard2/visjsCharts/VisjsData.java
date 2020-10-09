@@ -1,12 +1,12 @@
 package com.wbc.supervisor.client.dashboard2.visjsCharts;
 
-import java.io.Serializable;
+import com.google.gwt.user.client.rpc.IsSerializable;
 import java.util.ArrayList;
 
 /**
  * Created by JIM on 1/9/2015.
  */
-public class VisjsData implements Serializable {
+public class VisjsData implements IsSerializable {
     ArrayList<VisjsNode> visjsNodes = new ArrayList<VisjsNode>();
     ArrayList<VisjsConnection> visjsConnections = new ArrayList<VisjsConnection>();
 
