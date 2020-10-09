@@ -1,5 +1,6 @@
 package com.dashboardutilities.server;
 
+import com.wbc.supervisor.server.dashboardutilities.AuthenticationHandler;
 import org.junit.Test;
 import java.io.File;
 

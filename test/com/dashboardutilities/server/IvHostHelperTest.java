@@ -1,6 +1,7 @@
 package com.dashboardutilities.server;
 
-import com.dashboardutilities.shared.ErrorInfo;
+import com.wbc.supervisor.server.dashboardutilities.IvHostHelper;
+import com.wbc.supervisor.shared.dashboardutilities.ErrorInfo;
 import com.google.gwt.editor.client.Editor;
 import org.apache.log4j.Logger;
 import org.junit.Ignore;

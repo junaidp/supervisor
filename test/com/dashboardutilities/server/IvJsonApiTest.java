@@ -1,7 +1,8 @@
 package com.dashboardutilities.server;
 
-import com.dashboardutilities.shared.ErrorInfo;
-import com.dashboardutilities.shared.IntravueHostStatus;
+import com.wbc.supervisor.server.dashboardutilities.IvJsonApi;
+import com.wbc.supervisor.shared.dashboardutilities.ErrorInfo;
+import com.wbc.supervisor.shared.dashboardutilities.IntravueHostStatus;
 import org.apache.log4j.Logger;
 import org.junit.Ignore;
 import org.junit.Test;
