@@ -1,0 +1,417 @@
+/** DASHBOARD2. */
+
+h1 {
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+}
+
+body, td, a, div, .p {
+    font-family: arial, sans-serif
+}
+
+.border {
+    border: 1px;
+}
+.heading {
+    text-align: center;
+    padding-left: 250px;
+    padding-right: 200px;
+    color: white;
+    font-size: 3em;
+}
+#jspheading {
+    text-align: center;
+    padding-left: 250px;
+    padding-right: 200px;
+    color: white;
+    font-size: 3em;
+}
+
+.centerText{
+    text-align: center;
+    font-weight: bold;
+    font-size: large;
+}
+.centerTextSmall{
+    text-align: center;
+    padding: 10px;
+}
+.bigcenterText{
+    text-align: center;
+    font-weight: bold;
+    font-size: x-large;
+}
+
+
+.header{
+    background-color: #d7dcff;
+}
+
+/** TAB PANEL CSS */
+
+.gwt-TabPanelContentContainer {
+    border: none !important;
+    height: 100% !important;
+
+}
+
+.gwt-TabPanel .gwt-TabPanelTabs { /* background: #ccc; */
+
+    padding-left: 5px;
+}
+
+.gwt-TabPanel .gwt-TabPanelContentContainer {
+    border-color: #ccc;
+    border-style: solid;
+    border-width: 0px 1px 1px;
+
+}
+
+.gwt-TabPanel .gwt-TabPanelContent {
+    overflow: auto;
+    padding: 6px;
+
+}
+
+.gwt-TabPanel .gwt-TabPanelTab {
+    margin-left: 4px;
+    padding: 4px 8px 4px 8px;
+    cursor: pointer;
+    cursor: hand;
+    color: white;
+    font-weight: normal;
+    text-align: center;
+    -moz-border-radius: 3px 3px 0px 0px;
+    border-radius: 3px 3px 0px 0px;
+    background-color: mediumslateblue !important;
+}
+
+.gwt-TabPanel .gwt-TabPanelTab-selected {
+    cursor: default;
+    background: skyblue !important;
+    color: #333;
+    font-weight: bold;
+}
+
+.gwt-TabPanelTab {
+    font-size: 17px !important;
+    cursor: pointer;
+    cursor: hand;
+
+}
+
+.gwt-TabPanelTab:hover {
+    background: #B0CFDF !important;
+    color: #333;
+    font-weight: bold;
+}
+
+.gwt-TabPanel .gwt-TabPanelTabs {
+    background: none !important;
+}
+
+.cw-DockPanel td {
+    border: 1px solid #BBBBBB;
+    padding: 3px;
+}
+/** BACK GROUND COLORS FOR ALL PANELS OF ALL TABS in order*/
+.actionPanel{
+    background-color: lightgreen;
+    width : 100%;
+    height : 40px;
+}
+
+.statsTablePanel{
+    background-color: mediumslateblue;
+    width : 100%;
+    height : 120px;
+}
+
+.summaryThresHoldPanel{
+    background-color: #ffffff;
+    width : 100%;
+    height : 100px;
+}
+
+.summaryPingResponses{
+    background-color: #81B4E1;
+    width : 100%;
+    height : 150px;
+}
+.statBarChart{
+    background-color: beige;
+    width : 100%;
+    height : 200px;
+}
+
+.summaryBandwidthData{
+    background-color: powderblue;
+    width : 100%;
+    height : 150px;
+}
+.timeBasedStatsPanel{
+    background-color: #ffffff;
+    width : 100%;
+    height : 250px;
+}
+.timeBasedStatsPanelWest{
+    background-color: darkkhaki;
+
+}
+
+.topologyInfoPanel{
+    background-color: darkkhaki;
+    width : 100%;
+}
+.deviceInfoDeviceData{
+    background-color: powderblue;
+}
+.deviceInfoNames{
+    background-color: #b1e0e6;
+}
+.netWorkVueWest{
+    background-color: darkkhaki;
+}
+.networkVueEast{
+    background-color: powderblue;
+}
+.pingDetailsWest{
+    background-color: powderblue;
+}
+.pingDetailsEast{
+    background-color: powderblue;
+}
+.bandwidthDetails{
+    background-color: powderblue;
+}
+.kpiDetailsNorth{
+    background-color: powderblue;
+}
+.kpiDetailsSouth{
+    background-color: powderblue;
+}
+
+/** END BACK GROUND COLORS FOR ALL PANELS OF ALL TABS in order*/
+.boldBigText {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.connections{
+    color: greenyellow;
+}
+
+.connectionSummaryFlexTable td {
+    border: 1px solid #BBBBBB;
+    padding: 3px;
+}
+
+.connectionSummaryFlexTable-buttonPanel td {
+    border: 0px;
+}
+
+.fixedWidthButton {
+    width: 150px;
+}
+
+.eastPanel {
+    background-color: #fffefa;
+}
+
+.westPanel {
+    background-color: #ffffff;
+}
+
+.northPanel {
+    background-color: #d7dcff;
+}
+
+.southPanel {
+    background-color: #ffffff;
+}
+
+.centerPanel {
+    background-color: #ffffff;
+}
+.inline{
+    display: inline;
+}
+.boldText {
+    font-weight: bold;
+
+}
+.normalText{
+    font-weight: normal;
+}
+
+.layoutTable{
+    background-color: powderblue;
+}
+
+.blueText {
+    color: darkblue;
+}
+.blueBigText{
+    color: darkblue;
+    font-size: 16px;
+    text-align: center;
+}
+.adminVerified{
+    background-color: #97B0F8;
+    text-align: center;
+}
+.adminUnVerified{
+    background-color: #FFF785;
+    text-align: center;
+}
+.adminTotal{
+    background-color: beige;
+    text-align: center;
+}
+.graybackground {
+    background-color: #cccccc;
+}
+.whitesmokeBackground{
+    background-color: whitesmoke;
+}
+.kpiStatsPanel{
+    background-color:lightyellow;
+}
+.alarmsNWarningsPanel{
+    background-color: whitesmoke;
+}
+.bluebackground {
+    background-color: cadetblue;
+}
+
+.pingOverBackground { background-color: black; }
+.pingFailBackground { background-color: magenta; }
+.bwOverBackground { background-color: pink; }
+.ipChangeBackground { background-color: blue; }
+.macChangeBackground { background-color: cyan; }
+.moveBackground { background-color: orange; }
+.linkSpeedBackground { background-color: yellow; }
+.disconnectedBackground { background-color: red; }
+.enetipBackground { background-color: green; }
+
+
+.gwt-Tree .gwt-TreeItem {
+    padding: 1px 0px;
+    margin: 0px;
+    white-space: nowrap;
+    cursor: hand;
+    cursor: pointer;
+}
+
+.gwt-Tree .gwt-TreeItem-selected {
+    background: #ebeff9;
+}
+
+.webLink{
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.point{
+    cursor: pointer;
+}
+.alignedRight{
+    text-justify: auto;
+    /*padding-left: 500px ;*/
+    color: #042662;
+}
+.sortingNamesPanel{
+    margin-left: 200px;
+    color: blue;
+
+}
+.invalid {
+    background-color: orange;
+}
+.online{
+    background-color: limegreen;
+}
+.offline{
+    background-color: saddlebrown;
+}
+.stopped{
+    background-color: red;
+}
+.unknown{
+    background-color: #ffffff;
+}
+
+.pingOverColor{
+    color: black !important;
+}
+.pingFailColor {
+    color: #ff00ff !important;
+}
+.bwOverColor {
+    color: pink !important;
+}
+.ipChangeColor {
+    color: blue !important;
+}
+.macChangeColor {
+    color: cyan !important;
+}
+.moveColor  {
+    color: orange !important;
+}
+.linkSpeedColor {
+    color: yellow !important;
+}
+.disconnectColor {
+    color: red !important;
+}
+.enetipColor{
+    color: green !important;
+}
+.gwt-TabLayoutPanelTab {
+    background-color: #ffffff !important;
+}
+
+.gwt-TabPanelTab {
+    background-color: #ffffff !important;
+}
+.gwt-TabPanelContentContainer{
+    border: none !important; }
+.gwt-TabPanel .gwt-TabPanelTabs {background: none !important;}
+
+
+.intravueDark{
+    background-color:  #006699 !important;
+}
+
+.intravueMedium{
+    background-color:  #3399CC !important;
+}
+.intravueLight{
+    background-color:  #B0E0E6 ;
+}
+
+.selectedNetwork {
+    font-weight: bold;
+
+}
+.placeHorizontally{
+    display: inline-block;
+
+}
+.gwt-Button {
+
+    background: #006699 !important;
+    color: black;
+}
+.flowpanelHorizontal{
+    display:inline-block !important;
+    float:right;
+}
+.spacingPanel{
+    padding: 10px;
+}
+
+
+

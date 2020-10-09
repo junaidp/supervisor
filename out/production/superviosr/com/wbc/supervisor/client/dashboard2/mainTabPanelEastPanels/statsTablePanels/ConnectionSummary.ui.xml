@@ -1,0 +1,70 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+    <g:HTMLPanel styleName="layoutTable" height="120px" width="300px">
+        <div style="centerConnectionsHeading">
+        <g:Label  styleName="blueBigText">Connections Summary</g:Label>
+        </div>
+        <table class="layoutTable" width="70%" cellspacing="0" cellpadding="0">
+
+        <tr>
+            <td width="20px">
+                <g:Label  styleName="boldText" wordWrap="false" width="100px">Admin Verified</g:Label>
+            </td>
+            <td>
+                <g:Label  styleName="boldText adminVerified">Yes</g:Label>
+            </td>
+            <td>
+                <g:Label  styleName="boldText adminUnVerified">No</g:Label>
+            </td>
+        </tr>
+            <tr>
+                <td width="20px">
+                    <g:Label   styleName="boldText">Connected</g:Label>
+                </td>
+                <td>
+                    <g:Label ui:field="verifiedConnected"  styleName="adminVerified"></g:Label>
+                </td>
+                <td>
+                    <g:Label ui:field="unVerifiedConnected" styleName="adminUnVerified"></g:Label>
+                </td>
+                <td>
+                    <g:Label ui:field="totalConnected" styleName="adminTotal"></g:Label>
+                </td>
+            </tr>
+
+            <tr>
+                <td width="20px">
+                    <g:Label  styleName="boldText">DisConnected</g:Label>
+                </td>
+                <td>
+                    <g:Label ui:field="verifiedDisconnected"  styleName="adminVerified"></g:Label>
+                </td>
+                <td>
+                    <g:Label ui:field="unVerifiedDisconnected" styleName="adminUnVerified"></g:Label>
+                </td>
+                <td>
+                    <g:Label ui:field="totalDisconnected" styleName="adminTotal"></g:Label>
+                </td>
+            </tr>
+
+            <tr>
+                <td width="20px">
+                    <g:Label  styleName="boldText">Total</g:Label>
+                </td>
+                <td>
+                    <g:Label ui:field="totalVerified"  styleName="adminVerified"></g:Label>
+                </td>
+                <td>
+                    <g:Label ui:field="totalNonVerified" styleName="adminUnVerified"></g:Label>
+                </td>
+                <td>
+                    <g:Label ui:field="total" styleName="adminTotal"></g:Label>
+                </td>
+            </tr>
+
+        </table>
+        <div style = "padding: 2px  0px 0px 70px;">
+    <g:Button ui:field="btnDisconnectedReport">Disconnected Report</g:Button>
+        </div>
+    </g:HTMLPanel>
+</ui:UiBinder>

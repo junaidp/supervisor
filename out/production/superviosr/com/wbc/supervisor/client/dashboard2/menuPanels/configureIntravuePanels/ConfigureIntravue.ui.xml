@@ -1,0 +1,46 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:p="urn:import:com.wbc.dashboard2.client.menuPanels"
+             xmlns:configureIntravuePanels="urn:import:com.wbc.supervisor.client.dashboard2.menuPanels.configureIntravuePanels">
+
+    <g:HTMLPanel>
+
+
+        <div style="width:100%;float:left;margin-bottom:30px;margin-top:10px;">
+
+        <div style="float: left; width: 450px;padding:5px">
+
+        <configureIntravuePanels:ProductSummaryPanel></configureIntravuePanels:ProductSummaryPanel>
+
+
+        </div>
+
+        <div style="float: left; width: 400px;padding:5px">
+
+            <configureIntravuePanels:DataControlPanel></configureIntravuePanels:DataControlPanel>
+        </div>
+
+        </div>
+
+        <div style="width:98.6%;float:left;margin:6px;background-color:#B0E0E6;height:300px">
+        <div style="float: left; width: 200px;">
+
+            <configureIntravuePanels:NetworkControlPanel></configureIntravuePanels:NetworkControlPanel>
+
+
+        </div>
+
+        <div style="float: left; width: 300px;padding:5px">
+
+            <configureIntravuePanels:NetworksListPanel></configureIntravuePanels:NetworksListPanel>
+
+        </div>
+
+
+    <div style="float: left; width: 300px;padding:5px">
+
+        <configureIntravuePanels:ScanRangesPanel></configureIntravuePanels:ScanRangesPanel>
+    </div>
+    </div>
+         </g:HTMLPanel>
+</ui:UiBinder>

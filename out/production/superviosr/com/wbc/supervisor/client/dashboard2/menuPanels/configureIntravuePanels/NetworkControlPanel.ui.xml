@@ -1,0 +1,18 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+    <g:HTMLPanel>
+        <div style="padding:15px">
+        <div style="padding:5px">
+            <g:Button width="120px">Add Network</g:Button>
+        </div>
+
+        <div style="padding:5px">
+            <g:Button width="120px">Edit Network</g:Button>
+        </div>
+
+        <div style="padding:5px">
+            <g:Button width="120px">Delete Network</g:Button>
+        </div>
+        </div>
+    </g:HTMLPanel>
+</ui:UiBinder>

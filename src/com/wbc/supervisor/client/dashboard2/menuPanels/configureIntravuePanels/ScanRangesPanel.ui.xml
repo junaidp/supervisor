@@ -1,0 +1,12 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+    <g:HTMLPanel>
+        <div style="padding-left:50px;padding-bottom:5px">
+            <HTML>Scan Ranges</HTML>
+        </div>
+
+        <div style="width:200px; height:88%;background-color:cornsilk; text-align:center">
+            <HTML>List of Ranges for Selected Network</HTML>
+        </div>
+    </g:HTMLPanel>
+</ui:UiBinder>
