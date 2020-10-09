@@ -86,7 +86,7 @@ public class supervisorServiceImpl extends RemoteServiceServlet implements super
         logger.addAppender(apndr);
         // setup Jooqds
         StringBuilder errors = new StringBuilder();
-        dsbConn = JooqUtil.getConnection("root", "0502", "dashboard2", "127.0.0.1", errors);
+        dsbConn = JooqUtil.getConnection("netvue", "netvue", "dashboard2", "127.0.0.1", errors);
         if ( dsbConn == null) {
             //TODO need a way to tell user there was a problem
             logger.fatal("Failed to get dashboard2 connection:, EXITING " + errors.toString());
