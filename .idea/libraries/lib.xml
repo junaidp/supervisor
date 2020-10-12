@@ -1,0 +1,40 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/war/WEB-INF/lib/apache-logging-log4j.jar!/" />
+      <root url="jar://$PROJECT_DIR$/war/WEB-INF/lib/commons-fileupload-1.2.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/war/WEB-INF/lib/commons-io-2.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/war/WEB-INF/lib/gson-2.2.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/war/WEB-INF/lib/gson-2.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/war/WEB-INF/lib/gwt-visualization-1.1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/war/WEB-INF/lib/gxt-theme-triton.jar!/" />
+      <root url="jar://$PROJECT_DIR$/war/WEB-INF/lib/gxt.jar!/" />
+      <root url="jar://$PROJECT_DIR$/war/WEB-INF/lib/httpclient-4.5.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/war/WEB-INF/lib/httpcore-4.4.12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/war/WEB-INF/lib/java-json.jar!/" />
+      <root url="jar://$PROJECT_DIR$/war/WEB-INF/lib/jcommon-1.0.21.jar!/" />
+      <root url="jar://$PROJECT_DIR$/war/WEB-INF/lib/joda-time-2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/war/WEB-INF/lib/jooq-3.12.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/war/WEB-INF/lib/jooq-checker-3.12.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/war/WEB-INF/lib/jooq-codegen-3.12.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/war/WEB-INF/lib/jooq-codegen-maven-3.12.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/war/WEB-INF/lib/jooq-meta-3.12.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/war/WEB-INF/lib/jooq-meta-extensions-3.12.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/war/WEB-INF/lib/jooq-scala_2.12-3.12.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/war/WEB-INF/lib/jstl-api-1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/war/WEB-INF/lib/junit-4.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/war/WEB-INF/lib/junit.jar!/" />
+      <root url="jar://$PROJECT_DIR$/war/WEB-INF/lib/log4j-1.2.16.jar!/" />
+      <root url="jar://$PROJECT_DIR$/war/WEB-INF/lib/mariadb-java-client-2.3.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/war/WEB-INF/lib/mysql-connector-java-5.1.44.jar!/" />
+      <root url="jar://$PROJECT_DIR$/war/WEB-INF/lib/reactive-streams-1.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/war/WEB-INF/lib/gwt-visualization-1.1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/war/WEB-INF/lib/gxt-theme-triton.jar!/" />
+      <root url="jar://$PROJECT_DIR$/war/WEB-INF/lib/gxt.jar!/" />
+      <root url="jar://$PROJECT_DIR$/war/WEB-INF/lib/java-json.jar!/" />
+    </SOURCES>
+  </library>
+</component>
