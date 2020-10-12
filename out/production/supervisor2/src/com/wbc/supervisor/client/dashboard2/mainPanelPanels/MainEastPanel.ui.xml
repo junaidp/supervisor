@@ -1,0 +1,31 @@
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:x="urn:import:com.wbc.supervisor.client.dashboard2.mainTabPanelEastPanels"
+             xmlns:x1="urn:import:com.wbc.dashboard2.client.mainTabPanelEastPanels.summaryThresholds">
+
+
+    <!--<g:DockLayoutPanel width="100%">-->
+        <!--<g:north size='1000' unit='EM' >-->
+    <g:VerticalPanel>
+    <!--<g:ScrollPanel ui:field="scrollPanel">-->
+            <g:VerticalPanel ui:field="mainPanel" styleName="intravueLight" width="100%" spacing="5">
+             <x:ActionPanel height="40px" width="100%" styleName="intravueLight"></x:ActionPanel>
+             <x:StatsTablePanel height="120px" width="100%" styleName="summaryBandwidthData">
+             </x:StatsTablePanel>
+             <x:SummaryThresHoldsPanel height="225px" width="100%" styleName="intravueLight">
+             </x:SummaryThresHoldsPanel>
+             <x:TimeBasedStatsPanel width="100%" styleName="intravueLight" spacing="2">
+             </x:TimeBasedStatsPanel>
+            </g:VerticalPanel>
+    <!--</g:ScrollPanel>-->
+    </g:VerticalPanel>
+        <!--</g:north>-->
+
+
+        <!--<g:center size='500' unit='EM'>-->
+            <!--&lt;!&ndash;<x:TimeBasedStatsPanel width="100%" height="100px" styleName="centerPanel"></x:TimeBasedStatsPanel>&ndash;&gt;-->
+        <!--</g:center>-->
+
+
+    <!--</g:DockLayoutPanel>-->
+</ui:UiBinder> 

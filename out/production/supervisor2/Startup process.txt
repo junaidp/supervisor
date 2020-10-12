@@ -1,0 +1,13 @@
+At startup check for the existance of the supervisor database.
+
+Checking of the dashboard databases is done by the collection process
+
+
+- if database does not exist, create from clean-supervisor.sql.  The installer will create that during installation
+but it may have been deleted for some reason.
+
+- if the database exists, run the alterdb script in case of any recent changes, for instance from a new update or changes
+during development.
+
+- read the current hosts from the supervisor database and add them to the collector at startup
+

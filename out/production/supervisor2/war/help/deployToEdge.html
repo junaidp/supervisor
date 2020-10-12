@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>How to Deploy ivDashboard.war to an IntraVUE Appliance</title>
+</head>
+<body>
+<h1>Choosing the method to use</h1>
+<p>
+    Open a Windows DOS Command Prompt or Power Shell.<br>
+    <ul>
+        <li>
+            Type SSH and Enter to see if there is a response.<br>
+        </li>
+        <li>
+            Type SCP and Enter to see if there is a response.<br>
+
+        </li>
+    </ul>
+</p>
+
+    If there is a response for both, continue to "Recommended Process if SSH and SCP are available".<br>
+    If either command is not recognized, go to "<a href="#no-scp">Recommended Process if SSH and SCP are NOT available</a>".
+</p>
+
+<h1>Recommended Process if SSH and SCP are available</h1>
+<h2>Required Tools</h2>
+<p>
+    The following tools are required depending on the host Operating System:
+    <ul>
+        <li>
+            ssh.exe - a Windows command line tool for logging into another machice available in most Windows 10 distributions.<br>
+        </li>
+        <li>
+            scp.exe - a Windows command line tool for file transfer to another machine available in most Windows 10 distributions.<br>
+        </li>
+    </ul>
+</p>
+<h2>Detailed Steps</h2>
+    <p>
+        Open a DOS command prompt or power shell.<br>
+        SSH into Edge as user intravue, password is intravue<br>
+        Enter "ssh intravue@192.168..1.100", change IP to be that of the Edge.
+    </p>
+    <p>
+        Change to superuser, enter "su -"<br>
+        enter "cd   /root"
+    </p>
+    <p>
+        Run script to Allow root login, enter "sh allowrootlogin.sh"
+    </p>
+    <img src="./deployImages/ssh-login.png" >
+    <p>
+        Open a second DOS command prompt or power shell.<br>
+    </p>
+    <p>
+        Run SCP command, enter the following, changing 10.1.1.149 to be the IP of your Edge
+        <br><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scp -p  "c:\wbcUtilities\dist\ivDashboard.war" root@10.1.1.149:/opt/intravue/autoip/tomcat8/webapps
+        <br><br>
+        NOTE: quotes are needed around the Windows file if there is a space in the filename.
+    </p>
+    <img src="./deployImages/scp-copy.png" >
+    <p>
+        Check result, it should say 100% as in the image above.<br>
+        Close the SSH command prompt.
+    </p>
+    <p>
+        Go back to the SSH command prompt window.<br>
+        Disable root login, enter "sh denyrootlogin.sh"
+    </p>
+    <p>
+        logout from superuser, enter "logout"<br>
+        logout from intravue, enter"logout"<br>
+        Close SSH command prompt window.
+    </p>
+
+
+
+
+<h1 id="no-scp">Recommended Process if SSH and SCP are NOT available</h1>
+<h2>Required Tools</h2>
+<p>
+    <li>
+        Putty.exe - a command line tool.<br>
+        Available at <a href="http://127.0.0.1:8765/tools/putty/putty.exe">http://127.0.0.1:8765/tools/putty/putty.exe</a>
+    </li>
+    <li>
+        winscp.exe - a Windows user interface tool to copy files<br>
+        Available at <a href="http://127.0.0.1:8765/tools/winscp/winscp517setup.exe">http://127.0.0.1:8765/tools/winscp/winscp517setup.exe</a>
+    </li>
+    </ul>
+</p>
+
+<h2>Process</h2>
+<p>
+    <ol>
+    <li>
+        Start Putty and log into the IntraVUE Edge appliance.
+    </li>
+    <li>
+        Execute a script that allows root login
+    </li>
+    <li>
+        Start WinScp, log into the IntraVUE Edge appliance.
+    </li>
+    <li>
+        Navigate to the web servers webapp folder on the appliance and the \\wbcUtilities\\dist folder on Windows
+    </li>
+    <li>
+        Copy the ivDashboard.war file from Windows to the Edge, close WinScp
+    </li>
+    <li>
+        Go back to Putty and execute a script the denys root login.  Exit.
+    </li>
+
+    </ol>
+</p>
+
+<h2>Detailed Steps</h2>
+<p>
+    Start Putty, enter the IP Address of the Edge and Open<br>
+    <br>
+    <img src="./deployImages/putty-login.png" >
+</p>
+<p>
+    Login using user intravue, password intravue<br>
+    Become the superuser, enter "su -"<br>
+    enter "cd /root"<br>
+    enter "sh allowrootlogin.sh"<br>
+    prompt will change for $ to #<br>
+    <br>
+    <img src="./deployImages/putty-allow.png">
+</p>
+    Start WinScp, enter the IP Address of the Edge, root for user and nosoup4u as the password. Login. <br>
+    <br>
+    <img src="./deployImages/winscp-login.png">
+<p>
+    Navigate to /opt/intravue/autoip/tomcat8/webapps on the right<br>
+    Navigate to \wbcUtilities\dist on the left<br>
+    Select ivDashboard.war on the left<br>
+    Right click on ivDashboard.war and Upload<br>
+    <br>
+    Note: If ivDashboard was previously installed you will see the file and a directory already there, overwrite the file<br>
+    <br>
+    <img src="./deployImages/winscp-upload.png">
+</p>
+
+<p>
+    Cloase WinScp<br>
+    Go back to Putty<br>
+    Enter "sh denyrootlogin.sh"<br>
+    Enter "logout" to exit superuser mode<br>
+    Enter "logout" to close Putty<br>
+</p>
+<p>
+    Done.
+</p>
+
+</body>
+</html>

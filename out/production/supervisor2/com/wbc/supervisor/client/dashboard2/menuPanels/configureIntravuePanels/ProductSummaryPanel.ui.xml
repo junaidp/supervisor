@@ -1,0 +1,21 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+    <g:HTMLPanel styleName="intravueLight">
+        <div style="padding:5px; height:120px">
+
+        <div style="padding:5px">
+             <g:Label styleName="placeHorizontally" width="100px">Product Key: </g:Label>
+             <g:Label styleName="placeHorizontally">----------- </g:Label>
+        </div>
+        <div style="padding:5px">
+            <g:Label  styleName="placeHorizontally" width="100px">Key Code:</g:Label>
+            <g:Label styleName="placeHorizontally">------------ </g:Label>
+        </div>
+
+        <div style="padding:5px">
+            <g:Label  styleName="placeHorizontally" width="100px">License: </g:Label>
+            <g:Label styleName="placeHorizontally">------------ </g:Label>
+        </div>
+        </div>
+    </g:HTMLPanel>
+</ui:UiBinder>

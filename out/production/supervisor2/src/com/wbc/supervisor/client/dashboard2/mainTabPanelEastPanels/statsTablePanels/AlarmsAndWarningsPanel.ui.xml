@@ -1,0 +1,7 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+    <g:HTMLPanel height="120px" width="300px" styleName="layoutTable">
+        <g:Label styleName="blueBigText">Alarms and Warnings</g:Label>
+        <g:Label ui:field="ip" styleName="centerTextSmall"> Available July 2015 </g:Label>
+    </g:HTMLPanel>
+</ui:UiBinder>

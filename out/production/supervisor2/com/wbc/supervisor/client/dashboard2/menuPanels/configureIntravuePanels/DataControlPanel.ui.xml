@@ -1,0 +1,18 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+    <g:HTMLPanel styleName="intravueLight">
+        <div style="padding:5px; height:120px">
+        <div style="padding:5px;text-align:center">
+            <g:Button width="120px" >Clear/Restart</g:Button>
+        </div>
+
+        <div style="padding:5px;text-align:center">
+            <g:Button width="120px" >Save Data</g:Button>
+        </div>
+
+        <div style="padding:5px;text-align:center">
+            <g:Button width="120px" >Restore Data</g:Button>
+        </div>
+        </div>
+    </g:HTMLPanel>
+</ui:UiBinder>

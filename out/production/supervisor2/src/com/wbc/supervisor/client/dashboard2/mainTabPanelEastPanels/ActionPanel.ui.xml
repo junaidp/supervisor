@@ -1,0 +1,26 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+    <g:HorizontalPanel styleName="actionPanel" spacing="4" width="100%">
+
+        <g:HorizontalPanel ui:field="hpnlTimePeriod">
+            <g:Label ui:field="timePeriod">Time period</g:Label>
+            <g:ListBox ui:field="listHours">
+                <g:item value="2">live</g:item>
+                <g:item value="8">8 Hours</g:item>
+                <g:item value="24">24 Hours</g:item>
+                <g:item value="48">48 Hours</g:item>
+
+        </g:ListBox>
+        </g:HorizontalPanel>
+        <g:VerticalPanel >
+
+            <g:Label ui:field="name1" styleName="boldBigText" visible="false"></g:Label>
+            <g:Label ui:field="name2" styleName="boldBigText" visible="false"></g:Label>
+
+        </g:VerticalPanel>
+        <g:Button ui:field="browseButton">Browse Intravue</g:Button>
+        <g:Button ui:field="test" visible="false">Jsp Test Button</g:Button>
+
+
+    </g:HorizontalPanel>
+</ui:UiBinder>

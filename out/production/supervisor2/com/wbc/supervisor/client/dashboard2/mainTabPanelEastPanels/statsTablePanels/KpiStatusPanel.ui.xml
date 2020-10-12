@@ -1,0 +1,51 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+    <g:HTMLPanel height="120px" width="300px" styleName="layoutTable">
+
+        <g:Label styleName="blueBigText">KPI Status</g:Label>
+
+        <table  width="90%">
+
+            <tr>
+                <td width="20px">
+                    <g:Label  styleName="boldText" wordWrap="false" width="100px">Unknown</g:Label>
+                </td>
+                <td>
+                    <g:Label ui:field="unknown">0</g:Label>
+                </td>
+
+            </tr>
+            <tr>
+                <td width="20px">
+                    <g:Label   styleName="boldText">Ignored</g:Label>
+                </td>
+                <td>
+                    <g:Label ui:field="ignored">0</g:Label>
+                </td>
+
+            </tr>
+
+            <tr>
+                <td width="20px">
+                    <g:Label  styleName="boldText">Critical Intermittent</g:Label>
+                </td>
+                <td>
+                    <g:Label ui:field="criticalIntermittent">0</g:Label>
+                </td>
+
+            </tr>
+
+            <tr>
+                <td width="20px">
+                    <g:Label  styleName="boldText" width="220px">Critical Always on</g:Label>
+                </td>
+                <td>
+                    <g:Label ui:field="criticalAlwaysOn">0</g:Label>
+                </td>
+
+            </tr>
+
+        </table>
+
+    </g:HTMLPanel>
+</ui:UiBinder>

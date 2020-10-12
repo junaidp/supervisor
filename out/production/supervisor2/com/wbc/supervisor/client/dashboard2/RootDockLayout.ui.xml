@@ -1,0 +1,18 @@
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:x="urn:import:com.wbc.supervisor.client.dashboard2.rootDockLayoutPanels">
+
+    <g:DockLayoutPanel>
+        <g:north size='110' unit='EM'>
+            <x:HeaderPanel ui:field="headerPanel"></x:HeaderPanel>
+        </g:north>
+
+        <g:center size='1000' width="100%" unit='EM'>
+       <x:MainPanel></x:MainPanel>
+        </g:center>
+
+        <g:south size="0" width="100%" unit='EM'>
+           <x:FooterPanel></x:FooterPanel>
+        </g:south>
+    </g:DockLayoutPanel>
+</ui:UiBinder> 

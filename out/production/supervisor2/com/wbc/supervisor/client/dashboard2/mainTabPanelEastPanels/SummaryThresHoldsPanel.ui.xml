@@ -1,0 +1,24 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:x="urn:import:com.wbc.supervisor.client.dashboard2.mainTabPanelEastPanels.summaryThresholds">
+    <g:HTMLPanel width="100%">
+        <!--<div style="width:100%">-->
+        <!--<div style="width:50%; height=150px; float:left;">-->
+        <!--<x:SummaryPingResponses width="100%"></x:SummaryPingResponses>-->
+        <!--</div>-->
+        <!--<div style="width:50%; height=150px; float:left;">-->
+        <!--<x:SummaryBandwidthData  width="100%"></x:SummaryBandwidthData>-->
+        <!--</div>-->
+        <!--</div>-->
+    <g:HorizontalPanel ui:field="container" width="100%">
+        <x:SummaryPingResponses ui:field="summaryPingResponses" width="50%"></x:SummaryPingResponses>
+        <x:SummaryBandwidthData  ui:field="summaryBandwidthData"  width="50%"></x:SummaryBandwidthData>
+
+    </g:HorizontalPanel>
+
+
+    </g:HTMLPanel>
+
+
+
+</ui:UiBinder>
